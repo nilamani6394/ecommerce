@@ -1,6 +1,7 @@
 package com.ecommerce.ecommerce.controller
 
 import com.ecommerce.ecommerce.Repository.ProductRepository
+import com.ecommerce.ecommerce.entity.Category
 import com.ecommerce.ecommerce.entity.Product
 import com.ecommerce.ecommerce.model.req.ReqProduct
 import com.ecommerce.ecommerce.model.res.ResponseMessage
@@ -18,9 +19,11 @@ class ProductController {
     fun addProduct(@ModelAttribute request:ReqProduct):ResponseEntity<*>{
         val newProduct= Product(
             name = request.name,
+            tags=request.tags,
             price = request.price,
-            description = request.description
-            ,category = request.category_id)
+            description = request.description,
+            category = request.category_id
+        )
         val product= productRepository.save(newProduct)
         return ResponseEntity(product,HttpStatus.CREATED)
     }
@@ -36,4 +39,16 @@ class ProductController {
         }
     }
 }
+
+/*@Throws(Exception::class)
+fun run(vararg args: String?) {
+    val post = Post("one to many mapping using JPA and hibernate", "one to many mapping using JPA and hibernate")
+    val comment1 = Comment("Very useful")
+    val comment2 = Comment("informative")
+    val comment3 = Comment("Great post")
+    post.getComments().add(comment1)
+    post.getComments().add(comment2)
+    post.getComments().add(comment3)
+    this.postRepository.save(post)
+}*/
 

@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 
 interface ProductRepository : JpaRepository<Product,Long> {
-    @Query("select p from Product p where p.name like %:keyword%")
+    @Query("select p from Product p where p.tags like %:keyword%")
     fun searchProduct(@Param("keyword") name: String): List<Product>?
 }

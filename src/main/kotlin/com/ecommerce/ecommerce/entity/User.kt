@@ -3,15 +3,14 @@ package com.ecommerce.ecommerce.entity
 import javax.persistence.*
 
 @Entity
-data class Product(
+data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id:Long=-1,
     val name:String="",
-    val tags:String,
-    val price:Int=0,
-    val description:String="",
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    val category:Category
+    @Column(unique = true)
+    val email:String="",
+    val password:String="",
+    val contact:Int=0,
+    val token:String=""
 )
