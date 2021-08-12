@@ -2,6 +2,7 @@ package com.ecommerce.ecommerce.controller
 
 import com.ecommerce.ecommerce.Repository.UserRepository
 import com.ecommerce.ecommerce.entity.User
+import com.ecommerce.ecommerce.model.req.ReqLogin
 import com.ecommerce.ecommerce.model.req.ReqUser
 import com.ecommerce.ecommerce.model.res.ResBadRequest
 import com.ecommerce.ecommerce.model.res.ResUser
@@ -9,10 +10,7 @@ import com.ecommerce.ecommerce.model.res.ResponseMessage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -47,4 +45,14 @@ class UserController {
         val resUser=ResUser(saveUser.name,saveUser.email)
         return ResponseEntity(resUser,HttpStatus.OK)
     }
+    /**Get UserDetails*/
+    @GetMapping("/getall")
+    fun getAllUser():MutableIterable<User>{
+        return userRepository.findAll()
+    }
+
+    /**User Login Details
+    fun login(@ModelAttribute request:ReqLogin):ResponseEntity<*>{
+        val existingUser:UserRepository.searchByEmail(email)
+    }*/
 }

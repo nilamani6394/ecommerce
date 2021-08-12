@@ -9,8 +9,8 @@ data class User(
     val id:Long=-1,
     val name:String="",
     @Column(unique = true)
-    val email:String="",
-    val password:String="",
+    var email:String="",
+    var password:String="",
     val otp:Int,
     val token:String=""
 )
