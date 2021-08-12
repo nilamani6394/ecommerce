@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 
 interface UserRepository :JpaRepository<User,Long> {
-    @Query("select u from User u where u.email like %:keyword%")
-    fun findByEmail(@Param("keyword") email: String):String
+    @Query("select u from User u where u.username like %:keyword%")
+    fun findByEmail(@Param("keyword") username: String):String
 
-    fun findByUsername(email: String):User
+    fun findByUsername(username: String):User
 
 }

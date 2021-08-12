@@ -24,6 +24,7 @@ class JwtAuthenticationController {
     private lateinit var jwtUserDetailsService: JwtUserDetailsService
 
     @Throws(Exception::class)
+    @PostMapping("/authenticate")
     fun createAuthenticationToken(@ModelAttribute request:JwtRequestOfUser):ResponseEntity<*>{
         authenticate(request.email,request.password)
         val userDetails: UserDetails =jwtUserDetailsService

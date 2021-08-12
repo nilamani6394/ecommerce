@@ -8,8 +8,8 @@ data class User(
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id:Long=-1,
     val name:String="",
-    @Column(unique = true)
-    var email:String="",
+    @Column(unique = true,name = "email_id")
+    var username:String="",
     var password:String="",
     val otp:Int,
     val token:String=""

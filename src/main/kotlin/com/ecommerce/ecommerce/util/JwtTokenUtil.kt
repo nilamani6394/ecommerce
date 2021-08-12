@@ -32,11 +32,6 @@ class JwtTokenUtil : Serializable {
 
 }
 
-fun generateToken(userDetails: UserDetails): String? {
-    val claims: Map<String, Any> = HashMap()
-    return doGenerateToken(claims, userDetails.username)
-}
-
 
 
 

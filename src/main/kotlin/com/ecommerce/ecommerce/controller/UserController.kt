@@ -2,11 +2,9 @@ package com.ecommerce.ecommerce.controller
 
 import com.ecommerce.ecommerce.Repository.UserRepository
 import com.ecommerce.ecommerce.entity.User
-import com.ecommerce.ecommerce.model.req.ReqLogin
 import com.ecommerce.ecommerce.model.req.ReqUser
 import com.ecommerce.ecommerce.model.res.ResBadRequest
 import com.ecommerce.ecommerce.model.res.ResUser
-import com.ecommerce.ecommerce.model.res.ResponseMessage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -37,12 +35,12 @@ class UserController {
         }
         val newUser=User(
             name = request.name,
-            email = request.email,
+            username = request.email,
             password = request.password,
             otp = Random.nextInt(111111..999999)
         )
         val saveUser=userRepository.save(newUser)
-        val resUser=ResUser(saveUser.name,saveUser.email)
+        val resUser=ResUser(saveUser.name,saveUser.username)
         return ResponseEntity(resUser,HttpStatus.OK)
     }
     /**Get UserDetails*/

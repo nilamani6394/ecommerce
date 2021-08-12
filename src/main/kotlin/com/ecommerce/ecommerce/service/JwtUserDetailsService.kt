@@ -2,7 +2,6 @@ package com.ecommerce.ecommerce.service
 
 import com.ecommerce.ecommerce.Repository.UserRepository
 import com.ecommerce.ecommerce.entity.User
-import com.ecommerce.ecommerce.model.req.ReqLogin
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -17,9 +16,9 @@ class JwtUserDetailsService : UserDetailsService {
     private lateinit var user:User
 
     @Throws(UsernameNotFoundException::class)
-     override fun loadUserByUsername(email: String): UserDetails {
-         user=userRepository.findByUsername(email)
-         return org.springframework.security.core.userdetails.User(user.email,
+     override fun loadUserByUsername(username: String): UserDetails {
+         user=userRepository.findByUsername(username)
+         return org.springframework.security.core.userdetails.User(user.username,
              user.password,
              ArrayList())
      }
