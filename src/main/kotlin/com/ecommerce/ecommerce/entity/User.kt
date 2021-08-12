@@ -11,6 +11,6 @@ data class User(
     @Column(unique = true)
     val email:String="",
     val password:String="",
-    val contact:Int=0,
+    val otp:Int,
     val token:String=""
 )
