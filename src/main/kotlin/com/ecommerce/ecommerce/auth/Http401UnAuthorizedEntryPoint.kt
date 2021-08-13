@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse
 const val serialVersionUID = -7858869558953243875L
 
 @Component
-class JwtAuthenticationEntryPoint: AuthenticationEntryPoint {
+class Http401UnAuthorizedEntryPoint: AuthenticationEntryPoint {
     @Throws(IOException::class)
     override fun commence(
         request: HttpServletRequest,

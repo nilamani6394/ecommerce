@@ -2,7 +2,7 @@ package com.ecommerce.ecommerce.controller
 
 import com.ecommerce.ecommerce.model.req.JwtRequestOfUser
 import com.ecommerce.ecommerce.model.res.JwtResponseOfUser
-import com.ecommerce.ecommerce.service.JwtUserDetailsService
+import com.ecommerce.ecommerce.service.MyUserDetailsService
 import com.ecommerce.ecommerce.util.JwtTokenUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -21,7 +21,7 @@ class JwtAuthenticationController {
     @Autowired
     private lateinit var jwtTokenUtil: JwtTokenUtil
     @Autowired
-    private lateinit var jwtUserDetailsService: JwtUserDetailsService
+    private lateinit var jwtUserDetailsService: MyUserDetailsService
 
     @Throws(Exception::class)
     @PostMapping("/authenticate")

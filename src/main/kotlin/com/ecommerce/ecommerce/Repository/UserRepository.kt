@@ -9,6 +9,6 @@ interface UserRepository :JpaRepository<User,Long> {
     @Query("select u from User u where u.username like %:keyword%")
     fun findByEmail(@Param("keyword") username: String):String
 
-    fun findByUsername(username: String):User
+    fun findByUsername(username: String):User?
 
 }

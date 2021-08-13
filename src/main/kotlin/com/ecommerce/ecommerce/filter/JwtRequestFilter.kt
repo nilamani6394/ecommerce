@@ -1,6 +1,6 @@
 package com.ecommerce.ecommerce.filter
 
-import com.ecommerce.ecommerce.service.JwtUserDetailsService
+import com.ecommerce.ecommerce.service.MyUserDetailsService
 import com.ecommerce.ecommerce.util.JwtTokenUtil
 import io.jsonwebtoken.ExpiredJwtException
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse
 @Component
 class JwtRequestFilter : OncePerRequestFilter() {
     @Autowired
-    private lateinit var jwtUserDetailsService: JwtUserDetailsService
+    private lateinit var jwtUserDetailsService: MyUserDetailsService
     @Autowired
     private lateinit var jwtTokenUtil: JwtTokenUtil
 

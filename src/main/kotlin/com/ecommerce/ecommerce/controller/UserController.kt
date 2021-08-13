@@ -3,23 +3,19 @@ package com.ecommerce.ecommerce.controller
 import com.ecommerce.ecommerce.Repository.UserRepository
 import com.ecommerce.ecommerce.entity.User
 import com.ecommerce.ecommerce.model.req.ReqUser
-import com.ecommerce.ecommerce.model.res.ResBadRequest
 import com.ecommerce.ecommerce.model.res.ResUser
-import com.ecommerce.ecommerce.service.JwtUserDetailsService
+import com.ecommerce.ecommerce.service.MyUserDetailsService
 import com.ecommerce.ecommerce.util.JwtTokenUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.BadCredentialsException
-import org.springframework.security.authentication.DisabledException
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.web.bind.annotation.*
 import kotlin.random.Random
 import kotlin.random.nextInt
 
 @RestController
-@RequestMapping("/user")
+//@RequestMapping("/user")
 class UserController {
     @Autowired
     private lateinit var userRepository: UserRepository
@@ -31,7 +27,7 @@ class UserController {
     private lateinit var jwtTokenUtil: JwtTokenUtil
 
     @Autowired
-    private lateinit var jwtUserDetailsService: JwtUserDetailsService
+    private lateinit var jwtUserDetailsService: MyUserDetailsService
 
     @PostMapping("/signup")
     fun signup(@ModelAttribute request: ReqUser): ResponseEntity<*> {
@@ -45,6 +41,10 @@ class UserController {
         val resUser=ResUser(saveNewUser.name,saveNewUser.username,saveNewUser.otp,saveNewUser
             .token)
         return ResponseEntity(resUser,HttpStatus.OK)
+    }
+    @GetMapping("/dumy")
+    fun dumy():String{
+        return "Hai"
     }
 
 
