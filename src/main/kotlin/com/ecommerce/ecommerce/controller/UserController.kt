@@ -5,9 +5,15 @@ import com.ecommerce.ecommerce.entity.User
 import com.ecommerce.ecommerce.model.req.ReqUser
 import com.ecommerce.ecommerce.model.res.ResBadRequest
 import com.ecommerce.ecommerce.model.res.ResUser
+import com.ecommerce.ecommerce.service.JwtUserDetailsService
+import com.ecommerce.ecommerce.util.JwtTokenUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.authentication.BadCredentialsException
+import org.springframework.security.authentication.DisabledException
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.web.bind.annotation.*
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -17,40 +23,30 @@ import kotlin.random.nextInt
 class UserController {
     @Autowired
     private lateinit var userRepository: UserRepository
+
+    @Autowired
+    private lateinit var authenticationManager: AuthenticationManager
+
+    @Autowired
+    private lateinit var jwtTokenUtil: JwtTokenUtil
+
+    @Autowired
+    private lateinit var jwtUserDetailsService: JwtUserDetailsService
+
     @PostMapping("/signup")
-    fun signup(@ModelAttribute request:ReqUser):ResponseEntity<*>{
-        val map = hashMapOf<String, String>()
-        if (request.name.isEmpty()) {
-            map["name"] = "Name cannot be empty"
-        }
-        if (request.email.isEmpty()) {
-            map["email"] = "email cannot be empty"
-        }/*else if (request.email.isVal){}*/
-        if (request.password.isEmpty()) {
-            map["password"] = "password field cannot be empty"
-        }
-//        if(departmentRepository.searchIdList()?.contains(request.deptId)==true){}
-        if (!map.isNullOrEmpty()) {
-            return ResponseEntity(ResBadRequest(map), HttpStatus.NOT_ACCEPTABLE)
-        }
+    fun signup(@ModelAttribute request: ReqUser): ResponseEntity<*> {
         val newUser=User(
             name = request.name,
-            username = request.email,
+            username = request.username,
             password = request.password,
-            otp = Random.nextInt(111111..999999)
+            otp = Random.nextInt(1111..99999)
         )
-        val saveUser=userRepository.save(newUser)
-        val resUser=ResUser(saveUser.name,saveUser.username)
+        val saveNewUser=userRepository.save(newUser)
+        val resUser=ResUser(saveNewUser.name,saveNewUser.username,saveNewUser.otp,saveNewUser
+            .token)
         return ResponseEntity(resUser,HttpStatus.OK)
     }
-    /**Get UserDetails*/
-    @GetMapping("/getall")
-    fun getAllUser():MutableIterable<User>{
-        return userRepository.findAll()
-    }
 
-    /**User Login Details
-    fun login(@ModelAttribute request:ReqLogin):ResponseEntity<*>{
-        val existingUser:UserRepository.searchByEmail(email)
-    }*/
+
 }
+
